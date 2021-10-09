@@ -1,0 +1,114 @@
+Notlar:
+*Dizeleri karşılaştırmak için == değil, equals() kullanılır.
+
+*Not: Character.isDigit(char), bir karakterin '0', '1', .. '9' karakterlerinden biri olup olmadığını test eder. Integer.parseInt(string) bir dizgiyi int'ye dönüştürür.
+(Note: Character.isDigit(char) tests if a char is one of the chars '0', '1', .. '9'. Integer.parseInt(string) converts a string to an int.) 
+
+*String ifadeler değiştirilemez ifadelerdir. Substring ile bir string ifadenin içinden bazı verileri atlatarak okuyabiliriz.
+
+*foo=gerçek komut yerine kullanılan geçici değer 
+
+*clickthrough rate (ctr):tıklama oranı demek.
+
+*Java Functional API 
+list.replaceAll(lambda) - lambda'yı listedeki her öğe için bir kez çağırır ve sonucu tekrar listeye (veya başka bir koleksiyon türüne) kaydeder. 
+Örnek: nums.replaceAll(n -> n * 2); 
+list.removeIf(lambda) --koleksiyondaki her öğe için lambda'yı bir kez çağırır ve lambda'nın true döndüğü her öğeyi kaldırır. 
+Örnek: nums.removeIf(n -> n < 0); 
+Simple Lambda Examples - Veri türleri bağlamdan ve aşağıdaki ifadenin türünden çıkarılır. "->": 
+n -> n * 2 -- Tamsayı alır, Tamsayı döndürür 
+n -> n < 0 && n >= -10 -- Tamsayı alır, boole döndürür 
+s -> s.length()  -- String alır, Tamsayı döndürür  
+s -> s.startsWith("hi") -- String alır, boole döndürür 
+Java akış sistemi, daha karmaşık lambda özellikleri sağlar. Akış çağrıları orijinal listeyi değiştirmez ve sonuçların yeni bir veri yapısını döndürür.
+ "filter()" boole mantığının "removeIf()"in tersi olduğuna dikkat edin. 
+ List<Integer> nums = - bir şey -;  nums = nums.stream()    .map(n -> n * 2)    .filter(n -> n >= 0)    .collect(Collectors.toList()); 
+
+*Hashmap 
+Java’da nesnelerimizi ve verilerimizi depolamak için bir çok yöntem bulabiliriz fakat HashMap’in burada ki farkı key, value çalışma mantığını kullanıyor olmasıdır. 
+Depoladığı her değere bir anahtar refere eder. Dolayısıyla spesifik bir elemanı, ögeyi bulmak kolaydır. Ek olarak kendi içinde bir çok kullanışlı metodu vardır.
+
+*Yeni bir boş Map için  mapMap<String, String> map = new HashMap<String, String>(); 
+map.get(key) -- bir anahtar için saklanan değeri alır veya bu anahtar Map'de yoksa boştur.
+
+map.put(key, value) -- Map'de yeni bir anahtar/değer çifti saklar. Bu anahtar için mevcut herhangi bir değerin üzerine yazar.
+
+map.containsKey(key) -- anahtar Map'de ise true, değilse false döndürür. 
+
+map.remove(key) --varsa, bu anahtar için anahtar/değer çiftini kaldırır. Anahtar yoksa hiçbir şey yapmaz.
+ 
+*Containskey: Oluşturulan hashmap'te daha önce kullanılmış olan anahtarı kontrol etmek için kullanılan metoddur. 
+
+*nest iç içe geçmek demek 
+
+*CharAt: Bir string dizesi içindeki karakterlerden belirtilen sıradaki karakter alır. String dizesindeki ilk karakterin index değeri 0, son karakteri de metin uzunluğunun 1 eksiğidir. 
+
+*Java compare to karşılaştırma yaparken kullanılır 
+
+
+
+İngilizce kelimeler ve Türkçe anlamları:
+clump:kümelemek 
+warmup problems:ısınma sorunları 
+Incredibly:inanılmaz bir şekilde,muazzam 
+Gathered:toplu 
+Phrase:ifade etmek 
+Quotes:tırnak işareti 
+made up:yapılan 
+Individual:birey,bireysel 
+Concatenation:birleştirme,birbirne bağlama 
+Kitten: kedi yavrusu 
+Punctuation:noktalama 
+Miscellelaneous:çeşitli 
+Leftmost:en soldaki 
+Identified:tanımlanan,tanımlanmış 
+so on:buna benzer,falan filan 
+Put another way:bir başka deyişle 
+Slice:dilim,bölmek 
+picks out:anlamak,ayırt etmek,seçmek 
+Yields:verim 
+Including:kapsama,içerme 
+Grab:kapmak,yakalamak 
+Bounds:Sınır,sınırlar 
+Incidentally:tesadüfen,yakında 
+Inclusive:dahil,kapsayan,içeren 
+common mistakes:yaygın hatalar 
+fed into:içine beslenen 
+Beyond:öte,ötesinde 
+Avoiding:önleme,kaçınma 
+Involve:kapsamak,içermek 
+non-existent:var olmayan 
+Assume:üstlenmek,saymak,farz etmek 
+Absolute:tam,mutlak 
+Inclusive:dahil,kapsayan,içeren 
+Whichever:hangi,herhangi 
+Event:olay,aksiyon 
+Event:bağlamak,bağ,ilişki 
+Diff:fark,farklilik 
+Contains:içersin,içeren 
+Nth:sonuncu,en sonuncu 
+Indicate:göstergesi olmak,işaret etmek 
+Remainders:geriye kalan,bakiye,artan 
+Instance:Örnek,misal 
+Overlap:örtüşmek,üst üste gelmek 
+Pattern:model,desen 
+Additionally:bundan başka,ilaveten 
+Overlapping:örtüşüm,örtüşme 
+Allowed:izinli,izin verilmiş 
+Concatenation:birbirene bağlama 
+Omit:dahil etmemek,koymamak,çıkarmak 
+Concatenation:birbirine bağlama,birleştirme 
+Containing:kapsama
+Squirrels:sincap,acemi sürücü 
+Stylishness:şıklık
+Squirrels:sincap,acemi sürüsü 
+Indicating:gösterme,belirtme 
+Strict:sıkı,katı 
+Increasing:çoğalan,artan 
+Bricks:tuğlalar,dışarısı 
+Fin:kanat,kol,yüzgeç 
+Omitted:çıkarılan,dahil edilmeyen
+Approach:yaklaşım,yanaşmak 
+Ccurrences:kez sonra,olduktan sonra bitir 
+ 
+
