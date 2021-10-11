@@ -1,0 +1,255 @@
+<groupSum>
+Given an array of ints, is it possible to choose a group of some of the ints, such that the group sums to
+ the given target? This is a classic backtracking recursion problem. Once you understand the recursive
+ backtracking strategy in this problem, you can use the same pattern for many problems to search a space 
+of choices. Rather than looking at the whole array, our convention is to consider the part of the array
+ starting at index start and continuing to the end of the array. The caller can specify the whole array 
+simply by passing start as 0. No loops are needed -- the recursive calls progress down the array.
+
+
+groupSum(0, [2, 4, 8], 10) → true
+groupSum(0, [2, 4, 8], 14) → true
+groupSum(0, [2, 4, 8], 9) → false
+
+public boolean groupSum(int start, int[] nums, int target) {
+ 
+  if (start >= nums.length) 
+     return (target == 0);
+  if (groupSum(start + 1, nums, target - nums[start]))
+     return true;
+  
+  if (groupSum(start + 1, nums, target))
+    return true;
+  
+
+  return false;
+}
+-------------------------------------------------------------------------------------------------------------
+<groupSum5>
+Given an array of ints, is it possible to choose a group of some of the ints, such that the group sums
+ to the given target with these additional constraints: all multiples of 5 in the array must be included in
+ the group. If the value immediately following a multiple of 5 is 1, it must not be chosen. (No loops needed.)
+
+
+groupSum5(0, [2, 5, 10, 4], 19) → true
+groupSum5(0, [2, 5, 10, 4], 17) → true
+groupSum5(0, [2, 5, 10, 4], 12) → false
+
+
+public boolean groupSum5(int start, int[] nums, int target) {
+  //5'in katları
+if (start >= nums.length) 
+  return (target == 0);
+  if (groupSum5(start+1, nums, target-nums[start]) && checkOne(start, nums))
+    return true;
+  if (nums[start] % 5 != 0 && groupSum5(start+1, nums, target)) 
+    return true;
+  return false;
+}
+private boolean checkOne(int start, int[] nums) {
+  if (start == 0) 
+    return true;
+  if (start > 0 && nums[start-1] % 5 == 0 && nums[start] == 1)
+    return false;
+  else
+    return true;
+
+}
+-------------------------------------------------------------------------------------------------------------
+<splitOdd10>
+Given an array of ints, is it possible to divide the ints into two groups, so that the sum of one group
+ is a multiple of 10, and the sum of the other group is odd. Every int must be in one group or the other. 
+Write a recursive helper method that takes whatever arguments you like, and make the initial call to
+ your recursive helper from splitOdd10(). (No loops needed.)
+
+
+splitOdd10([5, 5, 5]) → true
+splitOdd10([5, 5, 6]) → false
+splitOdd10([5, 5, 6, 1]) → true
+
+
+public boolean splitOdd10(int[] nums) {
+  /*Bir int dizisi verildiğinde, int'leri iki gruba ayırmak mümkün müdür, 
+  böylece bir grubun toplamı 10'un katı ve diğer grubun toplamı tek olur.
+  Her int bir grupta veya diğerinde olmalıdır. İstediğiniz argümanları alan 
+  bir özyinelemeli yardımcı yöntem yazın ve özyinelemeli yardımcınıza 
+  ilk çağrıyı splitOdd10()'dan yapın. (Döngü gerekmez.)*/
+  int index = 0;
+  int sum1 = 0;
+  int sum2 = 0;
+  return recArray(nums, index, sum1, sum2);
+}
+private boolean recArray ( int[] nums, int index, int sum1, int sum2 ) {
+  if ( index >= nums.length ) {
+    return (sum1%10 == 0 && sum2%2 !=0) || (sum2%10 == 0 && sum1%2 !=0);
+  }
+  int value = nums[index];
+  return (recArray(nums, index + 1, sum1 + value, sum2) ||
+    recArray(nums, index + 1, sum1, sum2 + value));
+
+}
+-------------------------------------------------------------------------------------------------------------
+<groupSum6>
+Given an array of ints, is it possible to choose a group of some of the ints, beginning at the start index, 
+such that the group sums to the given target? However, with the additional constraint 
+that all 6's must be chosen. (No loops needed.)
+
+
+groupSum6(0, [5, 6, 2], 8) → true
+groupSum6(0, [5, 6, 2], 9) → false
+groupSum6(0, [5, 6, 2], 7) → false
+
+
+public boolean groupSum6(int start, int[] nums, int target) {
+  /*Bir dizi ints verildiğinde, başlangıç dizininden başlayarak, 
+  grubun verilen hedefe toplanacağı şekilde bazı int'lerden oluşan 
+  bir grup seçmek mümkün müdür? Ancak, tüm 6'ların seçilmesi gerektiği
+  ek kısıtlaması ile. (Döngü gerekmez.)
+  */
+  if(start>=nums.length)
+    return (target==0);
+    
+  if(groupSum6(start+1,nums,target-nums[start])) 
+    return true;
+  if(nums[start]!=6 && groupSum6(start+1,nums,target)) 
+    return true;
+  
+  
+  return false;
+}
+-------------------------------------------------------------------------------------------------------------
+<groupSumClump>
+Given an array of ints, is it possible to choose a group of some of the ints, such that the group 
+sums to the given target, with this additional constraint: if there are numbers in the array that 
+are adjacent and the identical value, they must either all be chosen, or none of them chosen. 
+For example, with the array {1, 2, 2, 2, 5, 2}, either all three 2's in the middle must be chosen or not,
+ all as a group. (one loop can be used to find the extent of the identical values).
+
+
+groupSumClump(0, [2, 4, 8], 10) → true
+groupSumClump(0, [1, 2, 4, 8, 1], 14) → true
+groupSumClump(0, [2, 4, 4, 8], 14) → false
+
+public boolean groupSumClump(int start, int[] nums, int target) {
+  /*Bir int dizisi verildiğinde, bu ek kısıtlamayla, grubun verilen hedefe toplamları
+  olacak şekilde bazı int'lerden bir grup seçmek mümkün müdür: dizide bitişik ve 
+  aynı değerde sayılar varsa, bunlar ya hepsi seçilmeli ya da hiçbiri seçilmemeli.
+  Örneğin, {1, 2, 2, 2, 5, 2} dizisinde, ortadaki üç 2'nin tümü bir grup olarak 
+  seçilmeli veya seçilmemelidir. (aynı değerlerin kapsamını bulmak için bir döngü 
+  kullanılabilir).
+  */
+  altArray(nums);
+  if (start >= nums.length) return target == 0;
+  if (groupSumClump(start+1, nums, target-nums[start])) 
+     return true;
+  if (groupSumClump(start+1, nums, target)) 
+    return true;
+  else return false; 
+}
+private void altArray(int[] nums) {
+  for (int i = 0; i < nums.length; i++) {
+    if (i > 0 && nums[i] == nums[i-1]) {
+      nums[i-1] += nums[i];
+      if (i+1 < nums.length && nums[i] != nums[i+1])
+        nums[i] = 0;
+      else if (i == nums.length-1)
+        nums[i] = 0;
+    }
+  }
+}
+-------------------------------------------------------------------------------------------------------------
+<split53>
+Given an array of ints, is it possible to divide the ints into two groups, so that the sum of the
+ two groups is the same, with these constraints: all the values that are multiple of 5 must be in one group, 
+and all the values that are a multiple of 3 (and not a multiple of 5) must be in the other. (No loops needed.)
+
+
+split53([1, 1]) → true
+split53([1, 1, 1]) → false
+split53([2, 4, 2]) → true
+
+public boolean split53(int[] nums) {
+  /*Bir int dizisi verildiğinde, bu kısıtlamalarla iki grubun toplamı aynı olacak
+  şekilde int'leri iki gruba ayırmak mümkün müdür: 5'in katı olan tüm değerler bir 
+  grupta olmalıdır ve tüm 3'ün katı olan (ve 5'in katı olmayan) değerler diğerinde
+  olmalıdır. (Döngü gerekmez.)*/
+ int index = 0;
+  int sum1 = 0;
+  int sum2 = 0;
+  return recArray(nums, index, sum1, sum2);
+}
+private boolean recArray ( int[] nums, int index, int sum1, int sum2 ) {
+  if ( index >= nums.length ) {
+    return sum1 == sum2;
+  }
+  int value = nums[index];
+  if (value%5 == 0)
+    return recArray(nums, index + 1, sum1 + value, sum2);
+  else if (value%3 == 0)
+    return recArray(nums, index + 1, sum1, sum2 + value);
+  else    
+    return (recArray(nums, index + 1, sum1 + value, sum2) ||
+      recArray(nums, index + 1, sum1, sum2 + value));
+
+  
+}
+-------------------------------------------------------------------------------------------------------------
+<groupNoAdj>
+Given an array of ints, is it possible to choose a group of some of the ints, such that the group sums to 
+the given target with this additional constraint: If a value in the array is chosen to be in the group, 
+the value immediately following it in the array must not be chosen. (No loops needed.)
+
+
+groupNoAdj(0, [2, 5, 10, 4], 12) → true
+groupNoAdj(0, [2, 5, 10, 4], 14) → false
+groupNoAdj(0, [2, 5, 10, 4], 7) → false
+
+
+public boolean groupNoAdj(int start, int[] nums, int target) {
+  /*Bir int dizisi verildiğinde, grubun bu ek kısıtlama ile verilen hedefe toplamları
+  olacak şekilde bazı int'lerden oluşan bir grup seçmek mümkün müdür:
+  Dizideki bir değer grupta olacak şekilde seçilirse, değer hemen dizide onu
+  takip etmek seçilmemelidir. (Döngü gerekmez.)*/
+
+if (start >= nums.length)
+    return (target == 0);
+  if (groupNoAdj(start+1, nums, target)) 
+    return true;
+  if (groupNoAdj(start+2, nums, target-nums[start])) 
+    return true;
+  return false;
+  
+  
+}
+-------------------------------------------------------------------------------------------------------------
+<splitArray>
+Given an array of ints, is it possible to divide the ints into two groups, so that the sums of the two groups
+ are the same. Every int must be in one group or the other. 
+Write a recursive helper method that takes whatever arguments you like, and make the initial call 
+to your recursive helper from splitArray(). (No loops needed.)
+
+
+splitArray([2, 2]) → true
+splitArray([2, 3]) → false
+splitArray([5, 2, 3]) → true
+
+public boolean splitArray(int[] nums) {
+  /*Bir int dizisi verildiğinde, int'leri iki grubun toplamları aynı olacak şekilde 
+  iki gruba ayırmak mümkün müdür? Her int bir grupta veya diğerinde olmalıdır.
+  İstediğiniz argümanları alan bir özyinelemeli yardımcı yöntem yazın ve özyinelemeli 
+  yardımcınıza splitArray()'den ilk çağrıyı yapın. (Döngü gerekmez.)*/
+   int index = 0;
+  int sum1 = 0;
+  int sum2 = 0;
+  return recArray(nums, index, sum1, sum2);
+}
+private boolean recArray ( int[] nums, int index, int sum1, int sum2 ) {
+  if ( index >= nums.length ) {
+    return sum1 == sum2;
+  }
+  int value = nums[index];
+  return (recArray(nums, index + 1, sum1 + value, sum2) ||
+    recArray(nums, index + 1, sum1, sum2 + value));
+}
+
+
